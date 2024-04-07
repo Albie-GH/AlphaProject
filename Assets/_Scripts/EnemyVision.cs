@@ -10,9 +10,14 @@ public class EnemyVision : MonoBehaviour
     public LayerMask obstacleMask; // Set this as whatIsGround
 
     public GameObject player;
+    public GameManager gameManager;
 
     public TMP_Text RangeText, HiddenText, AngleText, DetectedText;
 
+    private void Awake()
+    {
+        gameManager = FindFirstObjectByType<GameManager>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,16 +27,23 @@ public class EnemyVision : MonoBehaviour
         bool isNotHidden = false;
 
         // Detect if player in range
+        
         if (Vector3.Distance(transform.position, player.transform.position) < detectRange)
         {
             isInRange = true;
-            RangeText.text = "In Range";
-            RangeText.color = Color.red;
+            if(RangeText != null)
+            {
+                RangeText.text = "In Range";
+                RangeText.color = Color.red;
+            }
         }
         else
         {
-            RangeText.text = "Not In Range";
-            RangeText.color = Color.green;
+            if (RangeText != null)
+            {
+                RangeText.text = "Not In Range";
+                RangeText.color = Color.green;
+            }
         }
 
         // Check if player in field of view angle
@@ -40,13 +52,19 @@ public class EnemyVision : MonoBehaviour
         if (angleToPlayer < detectAngle / 2f)
         {
             isInAngle = true;
-            AngleText.text = "In Angle";
-            AngleText.color = Color.red;
+            if (AngleText != null)
+            {
+                AngleText.text = "In Angle";
+                AngleText.color = Color.red;
+            }
         }
         else
         {
-            AngleText.text = "Not In Angle";
-            AngleText.color = Color.green;
+            if (AngleText != null)
+            {
+                AngleText.text = "Not In Angle";
+                AngleText.color = Color.green;
+            }
         }
 
         // Debug Raycast
@@ -59,31 +77,47 @@ public class EnemyVision : MonoBehaviour
                 Debug.DrawRay(transform.position, directionToPlayer * detectRange, Color.red);
 
                 isNotHidden = true;
-                HiddenText.text = "Not Hidden";
-                HiddenText.color = Color.red;
+                if (HiddenText != null)
+                {
+                    HiddenText.text = "Not Hidden";
+                    HiddenText.color = Color.red;
+                }
             }
             else
             {
                 Debug.DrawRay(transform.position, directionToPlayer * detectRange, Color.green);
                 //Debug.Log("Raycast not hit player");
-                HiddenText.text = "Is Hidden";
-                HiddenText.color = Color.green;
+                if (HiddenText != null)
+                {
+                    HiddenText.text = "Is Hidden";
+                    HiddenText.color = Color.green;
+                }
             }
         }   
         else
         {
             Debug.DrawRay(transform.position, directionToPlayer * detectRange, Color.blue);
-            HiddenText.text = "Is Hidden";
-            HiddenText.color = Color.green;
+            if (HiddenText != null)
+            {
+                HiddenText.text = "Is Hidden";
+                HiddenText.color = Color.green;
+            }
         }
         
         if (isInRange && isInAngle && isNotHidden)
         {
-            DetectedText.text = "Detected!";
-            DetectedText.color = Color.red;
+            gameManager.UpdateGameState(GameState.Lose);
         }
         else
         {
-            DetectedText.text = "";        }
+            if(DetectedText != null)
+                DetectedText.text = "";        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectRange);
+
     }
 }

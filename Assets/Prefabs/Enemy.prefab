@@ -334,12 +334,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66f1e019d8840e48b0d216d53cfc208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRange: 30
-  detectAngle: 90
+  detectRange: 15
+  detectAngle: 45
   obstacleMask:
     serializedVersion: 2
     m_Bits: 1025
   player: {fileID: 0}
+  gameManager: {fileID: 0}
   RangeText: {fileID: 0}
   HiddenText: {fileID: 0}
   AngleText: {fileID: 0}
