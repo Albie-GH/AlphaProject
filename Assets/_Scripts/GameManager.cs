@@ -30,12 +30,15 @@ public class GameManager : MonoBehaviour
             case GameState.Play:
                 HandlePlay();
                 break;
-            case GameState.Victory:
+            case GameState.RoundComplete:
+                HandleRoundComplete();
                 break;
             case GameState.Lose:
                 HandleLose();
                 break;
             case GameState.Shop:
+                break;
+            case GameState.FinalVictory:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -53,12 +56,20 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 0;
     }
+
+    private void HandleRoundComplete()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+    }
 }
 
 public enum GameState
 {
     Play,
-    Victory,
+    RoundComplete,
     Lose,
-    Shop
+    Shop,
+    FinalVictory
 }

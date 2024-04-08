@@ -7,6 +7,7 @@ using System;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _gameOverPanel;
+    [SerializeField] private GameObject _roundCompletePanel;
     [SerializeField] private TextMeshProUGUI _stateText;
 
     void Awake()
@@ -22,6 +23,7 @@ public class MenuManager : MonoBehaviour
     private void GameManagerOnGameStateChanged(GameState state)
     {
         _gameOverPanel.SetActive(state == GameState.Lose);
+        _roundCompletePanel.SetActive(state == GameState.RoundComplete);
     }
 
 
