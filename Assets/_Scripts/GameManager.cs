@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    private HUDScript HUD;
 
     public GameState State;
 
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        HUD = FindFirstObjectByType<HUDScript>();
         UpdateGameState(GameState.Play);
     }
 
@@ -36,8 +38,6 @@ public class GameManager : MonoBehaviour
             case GameState.Lose:
                 HandleLose();
                 break;
-            case GameState.Shop:
-                break;
             case GameState.FinalVictory:
                 break;
             default:
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     private void HandlePlay()
     {
         Time.timeScale = 1;
+        HUD.UpdateQuotaText("Quota Needed", Color.white);
     }
     private void HandleLose()
     {
@@ -70,6 +71,5 @@ public enum GameState
     Play,
     RoundComplete,
     Lose,
-    Shop,
     FinalVictory
 }

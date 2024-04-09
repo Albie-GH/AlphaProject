@@ -5,18 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class _MenuScript : MonoBehaviour
 {
-    StatsManager StatsManager;
-
     public void Start()
     {
-        StatsManager = FindFirstObjectByType<StatsManager>();
+
     }
     public void StartGame()
     {
-        if ( StatsManager != null )
+        if ( StatsManager.Instance != null )
         {
-            StatsManager.ResetStatsManager();
+            StatsManager.Instance.ResetStatsManager();
         }
         SceneManager.LoadScene("PlayLevel");
+    }
+
+    public void Shop()
+    {
+        SceneManager.LoadScene("Shop");
     }
 }

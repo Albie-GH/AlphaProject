@@ -7,11 +7,24 @@ public class StatsManager : MonoBehaviour
     // Make singleton
     public static StatsManager Instance;
 
-    private int _totalCoins = 0;
-    private int _coinsThisRound = 0;
-    private int _currentLevel = 1;
-    private int _totalQuota = 2;
-    private int _currentQuota = 0;
+    // Game variables
+    public int totalCoins = 0;
+    public int coinsThisRound = 0;
+    public int currentLevel = 1;
+    public int quotaProgress = 0;
+
+    // DIFFICULTY STATS
+    public int totalQuota = 2;
+    public float enemyFOV = 90f;
+    public float enemySpeed = 3.5f;
+    public float enemyDetectTime = 1f;
+    public float currentDetection = 0f;
+    public float detectingSpeed = 1f;
+    public float undetectingSpeed = -0.5f;
+
+    // Enemies
+    private List<EnemyVision> _enemies = new List<EnemyVision>();
+
 
     private void Awake()
     {
@@ -36,19 +49,15 @@ public class StatsManager : MonoBehaviour
     // ***************
     public void CollectCoin()
     {
-        _totalCoins++;
-        _coinsThisRound++;
-        _currentQuota++;
-    }
-    public int ReturnTotalCoins()
-    {
-        return _totalCoins;
+        totalCoins++;
+        coinsThisRound++;
+        quotaProgress++;
     }
     public bool SpendCoins(int amount)
     {
-        if(amount >= _totalCoins)
+        if(amount >= totalCoins)
         {
-            _totalCoins -= amount;
+            totalCoins -= amount;
             return true;
         }
         else
@@ -57,36 +66,59 @@ public class StatsManager : MonoBehaviour
         }
     }
     // COINS THIS ROUND
-    public int ReturnCoinsThisRound()
-    {
-        return _coinsThisRound;
-    }
     public void ResetCoinsThisRound()
     {
-        _coinsThisRound = 0;
+        coinsThisRound = 0;
     }
 
     // ***************
     // CURRENT LEVEL INTERFACE
     // ***************
-    public int ReturnCurrentLevel()
-    {
-        return _currentLevel;
-    }
     public void IncreaseCurrentLevel()
     {
-        _currentLevel++;
+        currentLevel++;
     }
 
     // ***************
     // QUOTA INTERFACE
     // ***************
-    public int ReturnTotalQuota()
+
+
+    // **************************
+    // ENEMY DIFFICULTY INTERFACE
+    // **************************
+
+
+    // ***************************
+    // CURRENT DETECTION INTERFACE
+    // ***************************
+
+    public void IncreaseCurrentDetection(float amount)
     {
-        return _totalQuota;
+        currentDetection += amount;
     }
-    public int ReturnCurrentQuota()
+    public bool AnyEnemyCanSeePlayer()
     {
-        return _currentQuota;
+        foreach(EnemyVision enemy in _enemies)
+        {
+            if (enemy.PlayerInSight())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    // ***************
+    // ENEMY INTERFACE
+    // ***************
+    public void AddEnemy(EnemyVision enemy)
+    {
+        _enemies.Add(enemy);
+    }
+    public void RemoveEnemy(EnemyVision enemy)
+    {
+        _enemies.Remove(enemy);
     }
 }

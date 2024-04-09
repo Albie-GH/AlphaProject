@@ -8,7 +8,6 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _roundCompletePanel;
-    [SerializeField] private TextMeshProUGUI _stateText;
 
     void Awake()
     {
@@ -24,18 +23,5 @@ public class MenuManager : MonoBehaviour
     {
         _gameOverPanel.SetActive(state == GameState.Lose);
         _roundCompletePanel.SetActive(state == GameState.RoundComplete);
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

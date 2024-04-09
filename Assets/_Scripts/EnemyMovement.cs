@@ -12,9 +12,16 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>(); 
     }
 
+    private void Start()
+    {
+        if (agent != null)
+        {
+            agent.speed = StatsManager.Instance.enemySpeed;
+        }
+    }
     // Update is called once per frame
     private void Update()
     {

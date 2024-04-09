@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public float coinDuration = 2;
+    [SerializeField] private float coinDuration = 2;
 
     GameManager GameManager;
     HUDScript HUD;
@@ -23,7 +23,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         else if (other.CompareTag("Exit"))
         {
-            if(StatsManager.Instance.ReturnCurrentQuota() >= StatsManager.Instance.ReturnTotalQuota())
+            if(StatsManager.Instance.quotaProgress >= StatsManager.Instance.totalQuota)
             {
                 GameManager.UpdateGameState(GameState.RoundComplete);
             }
