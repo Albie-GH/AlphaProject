@@ -79,6 +79,15 @@ public class StatsManager : MonoBehaviour
         coinsThisRound = 0;
     }
 
+    // *************
+    // KEY INTERFACE
+    // *************
+    public void CollectKey()
+    {
+        keys++;
+    }
+
+
     // ***************
     // CURRENT LEVEL INTERFACE
     // ***************

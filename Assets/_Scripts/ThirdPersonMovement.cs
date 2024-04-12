@@ -13,6 +13,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
+    bool isWalking = false;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -31,11 +32,14 @@ public class ThirdPersonMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    Animator anim;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -74,7 +78,6 @@ public class ThirdPersonMovement : MonoBehaviour
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
-
         }
     }
 
@@ -85,10 +88,18 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-
+            
         // in air
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+
+        // Walking animation
+        isWalking = moveDirection.magnitude > 0.1f;
+        if (isWalking)
+            anim.SetFloat("Speed", 1);
+        else
+            anim.SetFloat("Speed", 0);
+
     }
 
     private void SpeedControl()

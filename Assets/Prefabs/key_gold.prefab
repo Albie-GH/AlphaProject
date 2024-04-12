@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 431008}
   - component: {fileID: 3331670}
   - component: {fileID: 2314182}
+  - component: {fileID: 6488743185310856608}
   m_Layer: 0
   m_Name: pPlane3
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +85,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &6488743185310856608
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105912}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.3784328
+  m_Height: 6.632355
+  m_Direction: 1
+  m_Center: {x: 0.27292284, y: 3.2058573, z: -0.1601255}
 --- !u!1 &170560
 GameObject:
   m_ObjectHideFlags: 0

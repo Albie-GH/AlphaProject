@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 041dcf393da43034fad42500a7b65c97, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -462,7 +462,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87c2baf778f31544bcb55674b83f654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinDuration: 2
+  coinDestroyDuration: 2
+  keyDestroyDuration: 2
+  useKeyKey: 102
 --- !u!1 &5511204026732092786
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +566,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 041dcf393da43034fad42500a7b65c97, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -671,7 +673,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 041dcf393da43034fad42500a7b65c97, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

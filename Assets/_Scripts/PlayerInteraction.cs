@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    [SerializeField] private float coinDuration = 2;
+    [SerializeField] private float coinDestroyDuration = 2;
+    [SerializeField] private float keyDestroyDuration = 2;
     private Door door = null;
 
     GameManager GameManager;
@@ -31,6 +32,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             StartCoroutine(PickupCoin(other));
         }
+        // Exit
         else if (other.CompareTag("Exit"))
         {
             if(StatsManager.Instance.quotaProgress >= StatsManager.Instance.totalQuota)
@@ -43,9 +45,14 @@ public class PlayerInteraction : MonoBehaviour
                 Debug.Log("Need quota");
             }
         }
+        // Keys
+        else if (other.CompareTag("Key"))
+        {
+            StartCoroutine(PickupKey(other));
+        }
 
         // Doors
-        if (other.CompareTag("Door"))
+        else if (other.CompareTag("Door"))
         {
             door = other.gameObject.GetComponent<Door>();
             if (door.isLocked)
@@ -75,18 +82,34 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    // Pick up coin
     IEnumerator PickupCoin(Collider coin)
     {
-        Debug.Log("Picked Up");
+        Debug.Log("Picked Up Coin");
         StatsManager.Instance.CollectCoin();
         HUD.UpdateUI();
 
         coin.GetComponent<MeshRenderer>().enabled = false;
         coin.GetComponent<Collider>().enabled = false;
 
-        yield return new WaitForSeconds(coinDuration);
+        yield return new WaitForSeconds(coinDestroyDuration);
 
         Destroy(coin.gameObject);
+    }
+
+    // Pick up key
+    IEnumerator PickupKey(Collider key)
+    {
+        Debug.Log("Picked Up Key");
+        StatsManager.Instance.CollectKey();
+        HUD.UpdateUI();
+
+        key.GetComponent<MeshRenderer>().enabled = false;
+        key.GetComponent<Collider>().enabled = false;
+
+        yield return new WaitForSeconds(keyDestroyDuration);
+
+        Destroy(key.gameObject);
     }
 
     private void MyInput()
