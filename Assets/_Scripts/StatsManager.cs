@@ -8,19 +8,27 @@ public class StatsManager : MonoBehaviour
     public static StatsManager Instance;
 
     // Game variables
+    [Header("Progress")]
     public int totalCoins = 0;
     public int coinsThisRound = 0;
     public int currentLevel = 1;
     public int quotaProgress = 0;
 
+    [Header("Inventory")]
+    public int keys = 0;
+
     // DIFFICULTY STATS
+    [Header("Difficulty")]
     public int totalQuota = 2;
     public float enemyFOV = 90f;
     public float enemySpeed = 3.5f;
-    public float enemyDetectTime = 1f;
+    public float enemyDetectTime = 100f;
     public float currentDetection = 0f;
-    public float detectingSpeed = 1f;
-    public float undetectingSpeed = -0.5f;
+    public float detectingSpeed = 10f;
+    public float fastDetectingSpeed = 50f;
+    public float undetectingSpeed = -5f;
+    public float enemyDetectRange = 15f;
+    public float enemyFastDetectRange = 5f;
 
     // Enemies
     private List<EnemyVision> _enemies = new List<EnemyVision>();
@@ -82,7 +90,10 @@ public class StatsManager : MonoBehaviour
     // ***************
     // QUOTA INTERFACE
     // ***************
-
+    public void ResetQuotaProgress()
+    {
+        quotaProgress = 0;
+    }
 
     // **************************
     // ENEMY DIFFICULTY INTERFACE
@@ -120,5 +131,15 @@ public class StatsManager : MonoBehaviour
     public void RemoveEnemy(EnemyVision enemy)
     {
         _enemies.Remove(enemy);
+    }
+
+    // ***************
+    // NEXT ROUND RESET
+    // ***************
+    public void ResetForNextRound()
+    {
+        ResetCoinsThisRound();
+        ResetQuotaProgress();
+        IncreaseCurrentLevel();
     }
 }

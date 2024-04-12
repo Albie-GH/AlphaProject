@@ -20,6 +20,7 @@ public class _MenuScript : MonoBehaviour
 
     public void Shop()
     {
+        StatsManager.Instance.ResetForNextRound();
         SceneManager.LoadScene("Shop");
     }
 }

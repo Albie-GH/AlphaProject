@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameOverScreen : MonoBehaviour
 {
-    public Text levelText;
-    public void Setup()//(int score)
+    [SerializeField] private TMP_Text _levelText;
+    void Start()
     {
         gameObject.SetActive(true);
-        //levelText.text = "You reached level " + score.ToString();
+        _levelText.text = "You reached level " + StatsManager.Instance.currentLevel.ToString();
     }
 
     public void MainMenu()

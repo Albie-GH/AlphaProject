@@ -5,20 +5,19 @@ using TMPro;
 
 public class EnemyVision : MonoBehaviour
 {
-    public float detectRange = 30f;
+    private float _detectRange;
+    private float _fastDetectRange;
     private float _detectAngle;
-    private float _detectTime;
     private float _detectingSpeed;
+    private float _fastDetectingSpeed;
     private float _undetectingSpeed;
     private bool _playerInSight = false;
 
     public LayerMask obstacleMask; // Set this as whatIsGround
 
     [SerializeField] private GameObject player;
+
     private GameManager gameManager;
-
-    public TMP_Text RangeText, HiddenText, AngleText, DetectedText;
-
     private HUDScript HUD;
 
 
@@ -29,9 +28,11 @@ public class EnemyVision : MonoBehaviour
     }
     private void Start()
     {
+        _detectRange = StatsManager.Instance.enemyDetectRange;
+        _fastDetectRange = StatsManager.Instance.enemyFastDetectRange;
         _detectAngle = StatsManager.Instance.enemyFOV;
-        _detectTime = StatsManager.Instance.enemyDetectTime;
         _detectingSpeed = StatsManager.Instance.detectingSpeed;
+        _fastDetectingSpeed = StatsManager.Instance.fastDetectingSpeed;
         _undetectingSpeed = StatsManager.Instance.undetectingSpeed;
         StatsManager.Instance.AddEnemy(this);
     }
@@ -48,8 +49,15 @@ public class EnemyVision : MonoBehaviour
             gameManager.UpdateGameState(GameState.Lose);
         }
 
+        // Detect if player is too close to enemy for faster detection
+        if (Vector3.Distance(transform.position, player.transform.position) < _fastDetectRange)
+        {
+            StatsManager.Instance.IncreaseCurrentDetection(_fastDetectingSpeed * Time.deltaTime);
+
+        }
+
         // Detect if player in range
-        if (Vector3.Distance(transform.position, player.transform.position) < detectRange)
+        if (Vector3.Distance(transform.position, player.transform.position) < _detectRange)
         {
             isInRange = true;
         }
@@ -64,23 +72,23 @@ public class EnemyVision : MonoBehaviour
 
         // Debug Raycast
         // Raycast to detect if player is hidden by obstacles
-        if (Physics.Raycast(transform.position + (directionToPlayer * 1.0f), directionToPlayer, out RaycastHit hit, detectRange, obstacleMask))
+        if (Physics.Raycast(transform.position + (directionToPlayer * 1.0f), directionToPlayer, out RaycastHit hit, _detectRange, obstacleMask))
         {
             if (hit.collider.gameObject == player && isInAngle && isInRange)
             {
-                Debug.DrawRay(transform.position, directionToPlayer * detectRange, Color.red);
+                Debug.DrawRay(transform.position, directionToPlayer * _detectRange, Color.red);
 
                 isNotHidden = true;
             }
             else
             {
-                Debug.DrawRay(transform.position, directionToPlayer * detectRange, Color.green);
+                Debug.DrawRay(transform.position, directionToPlayer * _detectRange, Color.green);
                 //Debug.Log("Raycast not hit player");
             }
         }   
         else
         {
-            Debug.DrawRay(transform.position, directionToPlayer * detectRange, Color.blue);
+            Debug.DrawRay(transform.position, directionToPlayer * _detectRange, Color.blue);
         }
 
         // Player detected
@@ -110,7 +118,7 @@ public class EnemyVision : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectRange);
+        Gizmos.DrawWireSphere(transform.position, _detectRange);
     }
 
     public bool PlayerInSight()

@@ -5,9 +5,13 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private float coinDuration = 2;
+    private Door door = null;
 
     GameManager GameManager;
     HUDScript HUD;
+
+    public KeyCode useKeyKey = KeyCode.F;
+
 
     private void Awake()
     {
@@ -15,8 +19,14 @@ public class PlayerInteraction : MonoBehaviour
         HUD = FindFirstObjectByType<HUDScript>();
     }
 
+    private void Update()
+    {
+        MyInput();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
+        // Coins
         if (other.CompareTag("Coin"))
         {
             StartCoroutine(PickupCoin(other));
@@ -33,13 +43,35 @@ public class PlayerInteraction : MonoBehaviour
                 Debug.Log("Need quota");
             }
         }
+
+        // Doors
+        if (other.CompareTag("Door"))
+        {
+            door = other.gameObject.GetComponent<Door>();
+            if (door.isLocked)
+            {
+                HUD.ShowKeyText(StatsManager.Instance.keys);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        // Exit
         if (other.CompareTag("Exit"))
         {
             HUD.HideQuotaNeededText();
+        }
+
+        // Doors
+        if (other.CompareTag("Door"))
+        {
+            door = other.gameObject.GetComponent<Door>();
+            if (door.isLocked)
+            {
+                HUD.HideKeyText();
+            }
+            door = null;
         }
     }
 
@@ -55,5 +87,15 @@ public class PlayerInteraction : MonoBehaviour
         yield return new WaitForSeconds(coinDuration);
 
         Destroy(coin.gameObject);
+    }
+
+    private void MyInput()
+    {
+        if (door && Input.GetKeyDown(useKeyKey) && door.isLocked)
+        {
+            door.UnlockDoor();
+            HUD.HideKeyText();
+            HUD.UpdateUI();
+        }
     }
 }

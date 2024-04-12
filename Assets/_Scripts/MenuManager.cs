@@ -21,7 +21,13 @@ public class MenuManager : MonoBehaviour
 
     private void GameManagerOnGameStateChanged(GameState state)
     {
-        _gameOverPanel.SetActive(state == GameState.Lose);
+        if (_gameOverPanel)
+        {
+            _gameOverPanel.SetActive(state == GameState.Lose);
+        }
+        if (_roundCompletePanel)
+        {
         _roundCompletePanel.SetActive(state == GameState.RoundComplete);
+        }
     }
 }

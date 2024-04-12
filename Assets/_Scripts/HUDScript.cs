@@ -8,6 +8,7 @@ using TMPro;
 public class HUDScript : MonoBehaviour
 {
     [SerializeField] private TMP_Text _coinsText;
+    [SerializeField] private TMP_Text _keysText;
     [SerializeField] private TMP_Text _levelText;
 
     [Header("Quota")] 
@@ -21,6 +22,13 @@ public class HUDScript : MonoBehaviour
 
     [Header("Detection")]
     [SerializeField] private TMP_Text _detectingText;
+    [SerializeField] private Image _detectionBar;
+    [SerializeField] private Image _detectionFill;
+
+    [Header("Doors")]
+    [SerializeField] private TMP_Text _useKeyText;
+    [SerializeField] private TMP_Text _needKeyText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,15 +36,37 @@ public class HUDScript : MonoBehaviour
         UpdateUI();
 
         _quotaNeededText.enabled = false;
+        _useKeyText.enabled = false;
+        _needKeyText.enabled = false;
 
         // UI that will remain for whole scene
         _levelText.text = _levelText.text + StatsManager.Instance.currentLevel.ToString();
+    }
+
+    private void Update()
+    {
+        // Detection UI
+        if (_detectionBar)
+        {
+            if(StatsManager.Instance.currentDetection <= 0)
+            {
+                _detectionFill.enabled = false;
+                _detectionBar.enabled = false;
+            }
+            else
+            {
+                _detectionFill.enabled = true;
+                _detectionBar.enabled = true;
+            }
+            _detectionFill.fillAmount = StatsManager.Instance.currentDetection / 100;
+        }
     }
 
     // Update is called once per frame
     public void UpdateUI()
     {
         _coinsText.text = "Coins: " + StatsManager.Instance.totalCoins;
+        _keysText.text = "Keys: " + StatsManager.Instance.keys;
 
         // Clear any existing quota dots
         foreach (Transform child in _quotaParent)
@@ -81,6 +111,8 @@ public class HUDScript : MonoBehaviour
             UpdateQuotaText("Quota Next Round", Color.white);
             Debug.Log("Shop scene");
         }
+
+        
     }
 
     // ***************
@@ -111,4 +143,25 @@ public class HUDScript : MonoBehaviour
     {
         _detectingText.enabled = false;
     }
+
+    // *******************
+    // DETECTION INTERFACE
+    // *******************
+    public void ShowKeyText(int keys)
+    {
+        if(keys > 0)
+        {
+            _useKeyText.enabled = true;
+        }
+        else
+        {
+            _needKeyText.enabled = true;
+        }
+    }
+    public void HideKeyText()
+    {
+        _useKeyText.enabled = false;
+        _needKeyText.enabled = false;
+    }
+
 }
