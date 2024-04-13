@@ -49,12 +49,6 @@ public class EnemyVision : MonoBehaviour
             gameManager.UpdateGameState(GameState.Lose);
         }
 
-        // Detect if player is too close to enemy for faster detection
-        if (Vector3.Distance(transform.position, player.transform.position) < _fastDetectRange)
-        {
-            StatsManager.Instance.IncreaseCurrentDetection(_fastDetectingSpeed * Time.deltaTime);
-
-        }
 
         // Detect if player in range
         if (Vector3.Distance(transform.position, player.transform.position) < _detectRange)
@@ -68,35 +62,48 @@ public class EnemyVision : MonoBehaviour
         if (angleToPlayer < _detectAngle / 2f)
         {
             isInAngle = true;
-        }
-
+        }      
+        
         // Debug Raycast
         // Raycast to detect if player is hidden by obstacles
-        if (Physics.Raycast(transform.position + (directionToPlayer * 1.0f), directionToPlayer, out RaycastHit hit, _detectRange, obstacleMask))
+        if (Physics.Raycast(transform.position + (directionToPlayer * 1f), directionToPlayer, out RaycastHit hit, _detectRange, obstacleMask))
         {
-            if (hit.collider.gameObject == player && isInAngle && isInRange)
+            if (hit.collider.gameObject == player && isInRange)
             {
-                Debug.DrawRay(transform.position, directionToPlayer * _detectRange, Color.red);
-
                 isNotHidden = true;
+
+                //Debug.Log(hit.collider.gameObject.name);
+                // Raycast hit player in range [angle not calculated]
+                Debug.DrawRay(transform.position, directionToPlayer * _detectRange, Color.green);
             }
             else
             {
-                Debug.DrawRay(transform.position, directionToPlayer * _detectRange, Color.green);
-                //Debug.Log("Raycast not hit player");
+                //Debug.Log("Raycast hit player but out of range");
+                Debug.DrawRay(transform.position, directionToPlayer * _detectRange, Color.blue);
             }
         }   
-        else
+
+        // Detect if player is too close to enemy for faster detection
+        if (Vector3.Distance(transform.position, player.transform.position) < _fastDetectRange && isNotHidden)
         {
-            Debug.DrawRay(transform.position, directionToPlayer * _detectRange, Color.blue);
+            StatsManager.Instance.IncreaseCurrentDetection(_fastDetectingSpeed * Time.deltaTime);
+            HUD.ShowDetectedBar();
+            _playerInSight = true;
+            //Debug.Log("Fast detect");
+
         }
 
-        // Player detected
-        if (isInRange && isInAngle && isNotHidden)
+        // Player detected normal
+        else if (isInRange && isInAngle && isNotHidden)
         {
             StatsManager.Instance.IncreaseCurrentDetection(_detectingSpeed * Time.deltaTime);
             HUD.ShowDetectedBar();
             _playerInSight = true;
+            //Debug.Log("Normal detect");
+
+            // Detected Ray
+            Debug.DrawRay(transform.position, directionToPlayer * _detectRange, Color.red);
+
         }
         else // Player undetected
         {

@@ -12,12 +12,15 @@ public class PlayerInteraction : MonoBehaviour
     HUDScript HUD;
 
     public KeyCode useKeyKey = KeyCode.F;
+    public string useKeyString;
 
 
     private void Awake()
     {
         GameManager = FindFirstObjectByType<GameManager>();
         HUD = FindFirstObjectByType<HUDScript>();
+
+        useKeyString = useKeyKey.ToString();
     }
 
     private void Update()
@@ -57,7 +60,7 @@ public class PlayerInteraction : MonoBehaviour
             door = other.gameObject.GetComponent<Door>();
             if (door.isLocked)
             {
-                HUD.ShowKeyText(StatsManager.Instance.keys);
+                HUD.ShowKeyText(StatsManager.Instance.keys, useKeyString);
             }
         }
     }
@@ -114,7 +117,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void MyInput()
     {
-        if (door && Input.GetKeyDown(useKeyKey) && door.isLocked)
+        if (door && Input.GetKeyDown(useKeyKey) && door.isLocked && StatsManager.Instance.keys > 0)
         {
             door.UnlockDoor();
             HUD.HideKeyText();

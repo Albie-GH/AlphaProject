@@ -23,4 +23,9 @@ public class _MenuScript : MonoBehaviour
         StatsManager.Instance.ResetForNextRound();
         SceneManager.LoadScene("Shop");
     }
+
+    public void NextRound()
+    {
+        SceneManager.LoadScene("PlayLevel");
+    }
 }

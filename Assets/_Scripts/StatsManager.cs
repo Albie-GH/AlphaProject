@@ -24,11 +24,11 @@ public class StatsManager : MonoBehaviour
     public float enemySpeed = 3.5f;
     public float enemyDetectTime = 100f;
     public float currentDetection = 0f;
-    public float detectingSpeed = 10f;
-    public float fastDetectingSpeed = 50f;
-    public float undetectingSpeed = -5f;
+    public float detectingSpeed = 100f;
+    public float fastDetectingSpeed = 200f;
+    public float undetectingSpeed = -25f;
     public float enemyDetectRange = 15f;
-    public float enemyFastDetectRange = 5f;
+    public float enemyFastDetectRange = 3f;
 
     // Enemies
     private List<EnemyVision> _enemies = new List<EnemyVision>();
