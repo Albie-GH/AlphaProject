@@ -6,9 +6,9 @@ public class ThirdPersonMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
-
     public float groundDrag;
 
+    [Header("Jump")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
@@ -27,7 +27,9 @@ public class ThirdPersonMovement : MonoBehaviour
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
+    public float slopeDrag;
 
+    [Header("Orientation")]
     public Transform orientation;
 
     float horizontalInput;
@@ -56,9 +58,12 @@ public class ThirdPersonMovement : MonoBehaviour
         SpeedControl();
 
         // handle drag
-        rb.drag = grounded ? groundDrag : 0;
-
-
+        if (grounded && !OnSlope())
+            rb.drag = groundDrag;
+        else if (OnSlope())
+            rb.drag = slopeDrag;
+        else
+            rb.drag = 0;
     }
 
     private void FixedUpdate()
@@ -92,7 +97,10 @@ public class ThirdPersonMovement : MonoBehaviour
             rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
 
             if(rb.velocity.y > 0)
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+            {
+                rb.AddForce(Vector3.down * 10f, ForceMode.Force);
+                Debug.Log("Downforce 10");
+            }
         }
 
         else if (grounded)
