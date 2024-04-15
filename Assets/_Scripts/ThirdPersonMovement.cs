@@ -39,14 +39,14 @@ public class ThirdPersonMovement : MonoBehaviour
 
     Rigidbody rb;
 
-    Animator anim;
+    Animator animator;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
-        anim = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -99,7 +99,7 @@ public class ThirdPersonMovement : MonoBehaviour
             if(rb.velocity.y > 0)
             {
                 rb.AddForce(Vector3.down * 10f, ForceMode.Force);
-                Debug.Log("Downforce 10");
+                //Debug.Log("Downforce 10");
             }
         }
 
@@ -116,9 +116,9 @@ public class ThirdPersonMovement : MonoBehaviour
         // Walking animation
         isWalking = moveDirection.magnitude > 0.1f;
         if (isWalking)
-            anim.SetFloat("Speed", 1);
+            animator.SetFloat("Speed", 1);
         else
-            anim.SetFloat("Speed", 0);
+            animator.SetFloat("Speed", 0);
 
         
 

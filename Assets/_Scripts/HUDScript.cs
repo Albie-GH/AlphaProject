@@ -149,7 +149,7 @@ public class HUDScript : MonoBehaviour
     // *******************
     public void ShowKeyText(int keys, string keyButton)
     {
-        _useKeyText.text = _useKeyText.text + "\n[" + keyButton + "]";
+        _useKeyText.text = "Use Key\n[" + keyButton + "]";
         if(keys > 0)
         {
             _useKeyText.enabled = true;

@@ -12,7 +12,7 @@ public class PlayerInteraction : MonoBehaviour
     HUDScript HUD;
 
     public KeyCode useKeyKey = KeyCode.F;
-    public string useKeyString;
+    private string useKeyString;
 
 
     private void Awake()
@@ -88,11 +88,16 @@ public class PlayerInteraction : MonoBehaviour
     // Pick up coin
     IEnumerator PickupCoin(Collider coin)
     {
-        Debug.Log("Picked Up Coin");
+        //Debug.Log("Picked Up Coin");
         StatsManager.Instance.CollectCoin();
         HUD.UpdateUI();
 
-        coin.GetComponent<MeshRenderer>().enabled = false;
+        MeshRenderer[] meshRenderers =  coin.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer renderer in meshRenderers)
+        {
+            renderer.enabled = false;
+        }
+
         coin.GetComponent<Collider>().enabled = false;
 
         yield return new WaitForSeconds(coinDestroyDuration);
@@ -103,7 +108,7 @@ public class PlayerInteraction : MonoBehaviour
     // Pick up key
     IEnumerator PickupKey(Collider key)
     {
-        Debug.Log("Picked Up Key");
+        //Debug.Log("Picked Up Key");
         StatsManager.Instance.CollectKey();
         HUD.UpdateUI();
 

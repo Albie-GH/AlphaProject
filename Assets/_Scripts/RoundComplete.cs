@@ -24,7 +24,8 @@ public class RoundComplete : MonoBehaviour
         allCards.Add(new DetectAngleCard());
         allCards.Add(new DetectTimeCard());
         allCards.Add(new SpeedCard());
-        allCards.Add(new QuotaCard());
+        if(StatsManager.Instance.totalQuota <= 4)
+            allCards.Add(new QuotaCard());
 
         continueButton.onClick.AddListener(OnContinueClicked);
 

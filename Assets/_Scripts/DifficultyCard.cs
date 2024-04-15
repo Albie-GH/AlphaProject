@@ -49,7 +49,7 @@ public class DetectTimeCard : DifficultyCard
 
     public override void ApplyDifficulty()
     {
-        StatsManager.Instance.enemyDetectTime /= 2;
+        StatsManager.Instance.detectingSpeed += StatsManager.Instance.detectingSpeed / 2;
     }
 }
 

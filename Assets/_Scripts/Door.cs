@@ -4,23 +4,19 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public bool isLocked = false;
-    private Rigidbody doorRB;
+    public bool isLocked = true;
+    Animator animator;
 
     private void Start()
     {
-        doorRB = GetComponentInChildren<Rigidbody>();
+        animator = GetComponent<Animator>();
 
-        if (isLocked)
-        {
-            doorRB.freezeRotation = true;
-        }
     }
 
     public void UnlockDoor()
     {
-        doorRB.freezeRotation = false;
         isLocked = false;
+        animator.SetBool("Unlocked", true);
         StatsManager.Instance.keys--;
     }
 

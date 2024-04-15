@@ -15,7 +15,7 @@ public class EnemyVision : MonoBehaviour
 
     public LayerMask obstacleMask; // Set this as whatIsGround
 
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerOBJ;
 
     private GameManager gameManager;
     private HUDScript HUD;
@@ -25,6 +25,7 @@ public class EnemyVision : MonoBehaviour
     {
         gameManager = FindFirstObjectByType<GameManager>();
         HUD = FindFirstObjectByType<HUDScript>();
+        playerOBJ = GameObject.FindGameObjectWithTag("PlayerOBJ");
     }
     private void Start()
     {
@@ -51,13 +52,13 @@ public class EnemyVision : MonoBehaviour
 
 
         // Detect if player in range
-        if (Vector3.Distance(transform.position, player.transform.position) < _detectRange)
+        if (Vector3.Distance(transform.position, playerOBJ.transform.position) < _detectRange)
         {
             isInRange = true;
         }
 
         // Check if player in field of view angle
-        Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
+        Vector3 directionToPlayer = (playerOBJ.transform.position - transform.position).normalized;
         float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
         if (angleToPlayer < _detectAngle / 2f)
         {
@@ -66,9 +67,9 @@ public class EnemyVision : MonoBehaviour
         
         // Debug Raycast
         // Raycast to detect if player is hidden by obstacles
-        if (Physics.Raycast(transform.position + (directionToPlayer * 1f), directionToPlayer, out RaycastHit hit, _detectRange, obstacleMask))
+        if (Physics.Raycast(transform.position + (directionToPlayer * 1f), directionToPlayer, out RaycastHit hit, _detectRange, ~obstacleMask))
         {
-            if (hit.collider.gameObject == player && isInRange)
+            if (hit.collider.gameObject == playerOBJ && isInRange)
             {
                 isNotHidden = true;
 
@@ -84,7 +85,7 @@ public class EnemyVision : MonoBehaviour
         }   
 
         // Detect if player is too close to enemy for faster detection
-        if (Vector3.Distance(transform.position, player.transform.position) < _fastDetectRange && isNotHidden)
+        if (Vector3.Distance(transform.position, playerOBJ.transform.position) < _fastDetectRange && isNotHidden)
         {
             StatsManager.Instance.IncreaseCurrentDetection(_fastDetectingSpeed * Time.deltaTime);
             HUD.ShowDetectedBar();

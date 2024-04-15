@@ -8,6 +8,7 @@ TagManager:
   - Exit
   - Door
   - Key
+  - PlayerOBJ
   layers:
   - Default
   - TransparentFX

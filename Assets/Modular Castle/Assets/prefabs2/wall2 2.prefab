@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 439714}
   - component: {fileID: 10810638}
+  - component: {fileID: 7544622667659601510}
   m_Layer: 0
   m_Name: light
   m_TagString: Untagged
@@ -178,6 +179,29 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &7544622667659601510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &133804
 GameObject:
   m_ObjectHideFlags: 0
@@ -5053,6 +5077,7 @@ GameObject:
   - component: {fileID: 402248}
   - component: {fileID: 3365360}
   - component: {fileID: 2307868}
+  - component: {fileID: 8163426011574136602}
   m_Layer: 0
   m_Name: wall2 2
   m_TagString: Untagged
@@ -5129,6 +5154,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8163426011574136602
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169516}
+  m_Material: {fileID: 13400000, guid: 06767f27b7933ea41ae0036872f3677d, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.9999986, y: 9.999999, z: 2.0000002}
+  m_Center: {x: -0.00000023841855, y: 4.9999995, z: 0.0000003576278}
 --- !u!1 &197638
 GameObject:
   m_ObjectHideFlags: 0

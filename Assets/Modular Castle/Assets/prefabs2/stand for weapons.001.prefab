@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 474818}
   - component: {fileID: 3374680}
   - component: {fileID: 2376612}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: armor 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 424084}
   - component: {fileID: 3337690}
   - component: {fileID: 2354868}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: helmet 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 497820}
   - component: {fileID: 3308706}
   - component: {fileID: 2346914}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: helmet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 3363610}
   - component: {fileID: 2334972}
   - component: {fileID: 4708561933532230381}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: stand for weapons.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 473532}
   - component: {fileID: 3390832}
   - component: {fileID: 2320856}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: helmet 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 483228}
   - component: {fileID: 3374992}
   - component: {fileID: 2356926}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: armor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 472098}
   - component: {fileID: 3366846}
   - component: {fileID: 2316174}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: helmet 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,7 +622,7 @@ GameObject:
   - component: {fileID: 497368}
   - component: {fileID: 3308442}
   - component: {fileID: 2377952}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: armor 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 426288}
   - component: {fileID: 3380216}
   - component: {fileID: 2323740}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: helmet 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
