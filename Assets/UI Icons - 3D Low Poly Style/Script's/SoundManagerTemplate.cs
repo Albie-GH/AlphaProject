@@ -4,41 +4,41 @@ using UnityEngine.UI;
 
 namespace FWC
 {
-    public class SoundManager : MonoBehaviour
+    public class SoundManagerTemplate : MonoBehaviour
     {
-        //Armazenar o Mixer
+        // Store the Mixer
 
         public AudioMixer masterMixer;
 
-        //public AudioSource source_Dialogo; //audio source da música
+        //public AudioSource source_Dialogo; // audio source of the music
 
         private float volume_sfx = 1;
         private float volume_music = 1;
 
-        //Mute
+        // Mute
 
-        [SerializeField] Image image_SFX, image_Music; //Armazenar imagem do botão mute da cena
+        [SerializeField] Image image_SFX, image_Music; // Store the mute button image of the scene
 
-        public Sprite[] sprite_SFX , sprite_Music; //Armazenar sprites "Icon_music On" e "Icon_music Off"
+        public Sprite[] sprite_SFX, sprite_Music; // Store sprites "Icon_music On" and "Icon_music Off"
 
-        //Referencia estática deste Script, para que ele possa ser acessado pelos outros scripts
+        // Static reference of this script, so that it can be accessed by other scripts
 
-        public static SoundManager Instance;
+        public static SoundManagerTemplate Instance;
 
 
-        //checar se está mutado ou não
+        // Check if it is muted or not
 
         private bool muteSFX, muteMusic;
 
-        //Armazenar áudios como .mp4 .ogg
+        // Store audios like .mp4 .ogg
 
-        public AudioClip[] clip_SFX; //efeitos sonoros
-        public AudioClip[] clip_Music; //música
+        public AudioClip[] clip_SFX; // sound effects
+        public AudioClip[] clip_Music; // music
 
-        //Armazenar Audio Sources da cena
+        // Store Audio Sources of the scene
 
-        public AudioSource source_SFX; //audio source para efeitos sonoros
-        public AudioSource source_Music; //audio source para música
+        public AudioSource source_SFX; // audio source for sound effects
+        public AudioSource source_Music; // audio source for music
 
 
         private void Awake()
@@ -47,9 +47,9 @@ namespace FWC
         }
 
         private void Start()
-        {        
-            source_Music.volume = volume_music;            
-            source_SFX.volume = volume_sfx;            
+        {
+            source_Music.volume = volume_music;
+            source_SFX.volume = volume_sfx;
         }
 
         public void PlaySFX(AudioClip clip)
@@ -63,9 +63,9 @@ namespace FWC
         }
 
         public void PlaySFX(int i)
-        {  
-           source_SFX.clip = clip_SFX[i];
-           source_SFX.PlayOneShot(source_SFX.clip);           
+        {
+            source_SFX.clip = clip_SFX[i];
+            source_SFX.PlayOneShot(source_SFX.clip);
 
         }
 
@@ -74,14 +74,14 @@ namespace FWC
             source_Music.clip = clip_Music[i];
             source_Music.PlayOneShot(source_Music.clip);
         }
-   
+
 
         public void MuteMusic()
         {
             muteMusic = !muteMusic;
 
             if (muteMusic)
-            {                
+            {
                 image_Music.sprite = sprite_Music[1];
                 masterMixer.SetFloat("VolumeMusic", -80f);
                 return;
@@ -129,5 +129,6 @@ namespace FWC
 
 
     }
+
 
 }

@@ -36,7 +36,12 @@ public class GameManager : MonoBehaviour
                 HandleRoundComplete();
                 break;
             case GameState.Lose:
-                HandleLose();
+                HandlePause();
+                break;
+            case GameState.Paused:
+                HandlePause();
+                break;
+            case GameState.Settings:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -47,9 +52,10 @@ public class GameManager : MonoBehaviour
     private void HandlePlay()
     {
         Time.timeScale = 1;
-        HUD.UpdateQuotaText("Quota Needed", Color.white);
+        if(HUD)
+            HUD.UpdateQuotaText("Quota Needed", Color.white);
     }
-    private void HandleLose()
+    private void HandlePause()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -62,11 +68,15 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 0;
     }
+
+
 }
 
 public enum GameState
 {
     Play,
     RoundComplete,
-    Lose
+    Lose,
+    Paused,
+    Settings
 }

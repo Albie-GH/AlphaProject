@@ -8,6 +8,8 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _roundCompletePanel;
+    [SerializeField] private GameObject _pausePanel;
+    [SerializeField] private GameObject _settingsPanel;
 
     void Awake()
     {
@@ -30,6 +32,14 @@ public class MenuManager : MonoBehaviour
         if (_roundCompletePanel)
         {
         _roundCompletePanel.SetActive(state == GameState.RoundComplete);
+        }
+        if (_pausePanel)
+        {
+        _pausePanel.SetActive(state == GameState.Paused);
+        }
+        if (_settingsPanel)
+        {
+        _settingsPanel.SetActive(state == GameState.Settings);
         }
     }
 }
