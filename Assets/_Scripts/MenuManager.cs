@@ -11,11 +11,13 @@ public class MenuManager : MonoBehaviour
 
     void Awake()
     {
+        // Subscribe to GameManagerOnGameStateChanged
         GameManager.OnGameStateChanged += GameManagerOnGameStateChanged;
     }
 
     private void OnDestroy()
     {
+        // Unsubscribe to GameManagerOnGameStateChanged
         GameManager.OnGameStateChanged -= GameManagerOnGameStateChanged;
     }
 

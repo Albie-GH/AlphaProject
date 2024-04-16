@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3399694}
   - component: {fileID: 2369136}
   - component: {fileID: 4753790959213680884}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: stand with weapons
   m_TagString: Untagged
   m_Icon: {fileID: 0}

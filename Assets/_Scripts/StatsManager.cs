@@ -16,12 +16,14 @@ public class StatsManager : MonoBehaviour
 
     [Header("Inventory")]
     public int keys = 0;
+    public bool jumpUnlocked = false;
 
     // DIFFICULTY STATS
     [Header("Difficulty")]
     public int totalQuota = 2;
     public float enemyFOV = 90f;
     public float enemySpeed = 3.5f;
+    public float enemyWaitSpeed = 1f;
     public float enemyDetectTime = 100f;
     public float currentDetection = 0f;
     public float detectingSpeed = 100f;

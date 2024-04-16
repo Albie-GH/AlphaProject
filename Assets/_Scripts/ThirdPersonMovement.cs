@@ -13,6 +13,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
+
     bool isWalking = false;
 
     [Header("Keybinds")]
@@ -75,14 +76,20 @@ public class ThirdPersonMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        if(grounded)
+            animator.SetBool("Jump", false);
         //when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (StatsManager.Instance.jumpUnlocked)
         {
-            readyToJump = false;
+            if (Input.GetKey(jumpKey) && readyToJump && grounded)
+            {
+                readyToJump = false;
+                animator.SetBool("Jump", true);
 
-            Jump();
+                Jump();
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }
         }
     }
 
@@ -150,7 +157,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private void Jump()
     {
         exitingSlope = true;
-
+        
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 

@@ -65,8 +65,8 @@ public class HUDScript : MonoBehaviour
     // Update is called once per frame
     public void UpdateUI()
     {
-        _coinsText.text = "Coins: " + StatsManager.Instance.totalCoins;
-        _keysText.text = "Keys: " + StatsManager.Instance.keys;
+        _coinsText.text = "x" + StatsManager.Instance.totalCoins;
+        _keysText.text = "x" + StatsManager.Instance.keys;
 
         // Clear any existing quota dots
         foreach (Transform child in _quotaParent)
@@ -104,7 +104,7 @@ public class HUDScript : MonoBehaviour
         if(StatsManager.Instance.quotaProgress >= StatsManager.Instance.totalQuota
             && scene.name != "Shop")
         {
-            UpdateQuotaText("Quota reached! Proceed to exit.", Color.yellow);
+            UpdateQuotaText("Quota reached! Proceed to exit.", new Color32(252,210,74, 255));
         }
         else if (scene.name == "Shop")
         {

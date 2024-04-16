@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class _MenuScript : MonoBehaviour
 {
-    public void Start()
+    public void Awake()
     {
-
+        Time.timeScale = 1;
     }
     public void StartGame()
     {
@@ -27,5 +27,10 @@ public class _MenuScript : MonoBehaviour
     public void NextRound()
     {
         SceneManager.LoadScene("PlayLevel");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

@@ -15,8 +15,8 @@ public class DetectRangeCard : DifficultyCard
 {
     public DetectRangeCard()
     {
-        Title = "Zoom Optics";
-        Info = "Increases enemies detection range.";
+        Title = "Magnifying Glasses";
+        Info = "Increases enemies detection range";
     }
 
     public override void ApplyDifficulty()
@@ -29,8 +29,8 @@ public class DetectAngleCard : DifficultyCard
 {
     public DetectAngleCard()
     {
-        Title = "Wide Angle Lens";
-        Info = "Increases enemies detection field of view.";
+        Title = "Wide Angle Lenses";
+        Info = "Increases enemies detection field of view";
     }
 
     public override void ApplyDifficulty()
@@ -43,8 +43,8 @@ public class DetectTimeCard : DifficultyCard
 {
     public DetectTimeCard()
     {
-        Title = "Advanced Callibration";
-        Info = "Decreases time allowed before detection.";
+        Title = "Attention to Detail";
+        Info = "Enemies detect you faster";
     }
 
     public override void ApplyDifficulty()
@@ -57,13 +57,16 @@ public class SpeedCard : DifficultyCard
 {
     public SpeedCard()
     {
-        Title = "Motor Upgrade";
-        Info = "Increases enemy movement speed.";
+        Title = "New Shoes";
+        Info = "Increases enemy movement speed";
     }
 
     public override void ApplyDifficulty()
     {
         StatsManager.Instance.enemySpeed += 1.5f;
+
+        if(StatsManager.Instance.enemyWaitSpeed > 0.25f)
+            StatsManager.Instance.enemyWaitSpeed -= 0.25f;
     }
 }
 
@@ -71,8 +74,8 @@ public class QuotaCard : DifficultyCard
 {
     public QuotaCard()
     {
-        Title = "Quota Increase";
-        Info = "Quota increases by one.";
+        Title = "I Need Gold";
+        Info = "Quota increases by one";
     }
 
     public override void ApplyDifficulty()

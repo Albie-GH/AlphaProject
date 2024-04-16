@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3354712}
   - component: {fileID: 2308020}
   - component: {fileID: 6442848617044083100}
+  - component: {fileID: 6343306966669000673}
   m_Layer: 10
   m_Name: bed1
   m_TagString: Untagged
@@ -103,5 +104,26 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.232102, y: 1.8963217, z: 4.5259852}
+  m_Size: {x: 8.232102, y: 1.5, z: 4.5259852}
   m_Center: {x: 0.03245449, y: 0.882134, z: -0.0074059963}
+--- !u!65 &6343306966669000673
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140542}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.41, y: 1.2, z: 3.88}
+  m_Center: {x: 0.032452583, y: 1.11, z: -0.0074059963}

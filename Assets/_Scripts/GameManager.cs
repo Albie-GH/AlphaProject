@@ -38,8 +38,6 @@ public class GameManager : MonoBehaviour
             case GameState.Lose:
                 HandleLose();
                 break;
-            case GameState.FinalVictory:
-                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
@@ -70,6 +68,5 @@ public enum GameState
 {
     Play,
     RoundComplete,
-    Lose,
-    FinalVictory
+    Lose
 }
