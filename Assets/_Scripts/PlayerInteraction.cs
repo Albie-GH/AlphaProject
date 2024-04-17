@@ -10,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour
 
     GameManager GameManager;
     HUDScript HUD;
+    SoundManager SoundManager;
 
     public KeyCode useKeyKey = KeyCode.F;
     private string useKeyString;
@@ -19,6 +20,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         GameManager = FindFirstObjectByType<GameManager>();
         HUD = FindFirstObjectByType<HUDScript>();
+        SoundManager = FindFirstObjectByType<SoundManager>();
 
         useKeyString = useKeyKey.ToString();
     }
@@ -91,6 +93,7 @@ public class PlayerInteraction : MonoBehaviour
         //Debug.Log("Picked Up Coin");
         StatsManager.Instance.CollectCoin();
         HUD.UpdateUI();
+        SoundManager.PlayClip(SoundManager.ClipType.CollectCoin);
 
         MeshRenderer[] meshRenderers =  coin.GetComponentsInChildren<MeshRenderer>();
         foreach (MeshRenderer renderer in meshRenderers)
@@ -111,6 +114,8 @@ public class PlayerInteraction : MonoBehaviour
         //Debug.Log("Picked Up Key");
         StatsManager.Instance.CollectKey();
         HUD.UpdateUI();
+        SoundManager.PlayClip(SoundManager.ClipType.CollectKey);
+
 
         key.GetComponent<MeshRenderer>().enabled = false;
         key.GetComponent<Collider>().enabled = false;
@@ -127,6 +132,11 @@ public class PlayerInteraction : MonoBehaviour
             door.UnlockDoor();
             HUD.HideKeyText();
             HUD.UpdateUI();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.State == GameState.Play)
+        {
+            GameManager.UpdateGameState(GameState.Paused);
         }
     }
 }

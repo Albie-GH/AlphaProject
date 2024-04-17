@@ -111,6 +111,10 @@ public class HUDScript : MonoBehaviour
             UpdateQuotaText("Quota Next Round", Color.white);
             Debug.Log("Shop scene");
         }
+        else
+        {
+            UpdateQuotaText("Quota Needed", Color.white);
+        }
 
         
     }

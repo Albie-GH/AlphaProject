@@ -7,6 +7,7 @@ using TMPro;
 public class ShopManager : MonoBehaviour
 {
     public HUDScript HUD;
+    SoundManager SoundManager;
 
     [Header("Keys1")]
     public TMP_Text key1CostText;
@@ -24,6 +25,10 @@ public class ShopManager : MonoBehaviour
     public int jumpCost = 5;
     public TMP_Text jumpSoldOut;
 
+    private void Awake()
+    {
+        SoundManager = FindFirstObjectByType<SoundManager>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +37,7 @@ public class ShopManager : MonoBehaviour
         key5BTN.onClick.AddListener(BuyKey5);
         jumpBTN.onClick.AddListener(BuyJump);
     }
+
 
     void UpdateShop()
     {
@@ -87,6 +93,7 @@ public class ShopManager : MonoBehaviour
             {
                 StatsManager.Instance.totalCoins -= key1Cost;
                 StatsManager.Instance.keys += 1;
+                SoundManager.PlayClip(SoundManager.ClipType.BuyButton);
             }
         }
         UpdateShop();
@@ -102,6 +109,8 @@ public class ShopManager : MonoBehaviour
             {
                 StatsManager.Instance.totalCoins -= key5Cost;
                 StatsManager.Instance.keys += 5;
+                SoundManager.PlayClip(SoundManager.ClipType.BuyButton);
+
 
             }
         }
@@ -117,6 +126,8 @@ public class ShopManager : MonoBehaviour
             {
                 StatsManager.Instance.totalCoins -= jumpCost;
                 StatsManager.Instance.jumpUnlocked = true;
+                SoundManager.PlayClip(SoundManager.ClipType.BuyButton);
+
             }
         }
         UpdateShop();

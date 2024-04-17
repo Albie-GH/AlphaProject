@@ -31,15 +31,15 @@ public class MenuManager : MonoBehaviour
         }
         if (_roundCompletePanel)
         {
-        _roundCompletePanel.SetActive(state == GameState.RoundComplete);
+            _roundCompletePanel.SetActive(state == GameState.RoundComplete);
         }
         if (_pausePanel)
         {
-        _pausePanel.SetActive(state == GameState.Paused);
+            _pausePanel.SetActive(state == GameState.Paused);
         }
         if (_settingsPanel)
         {
-        _settingsPanel.SetActive(state == GameState.Settings);
+            _settingsPanel.SetActive(state == GameState.Settings);
         }
     }
 }
