@@ -142,10 +142,11 @@ public class PlayerInteraction : MonoBehaviour
             GameManager.UpdateGameState(GameState.Paused);
         }
 
+        /* CHEATS
         if (Input.GetKeyDown(KeyCode.P))
         {
             StatsManager.Instance.CollectCoin();
             HUD.UpdateUI();
-        }
+        }*/
     }
 }
