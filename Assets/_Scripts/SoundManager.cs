@@ -79,6 +79,19 @@ public class SoundManager : MonoBehaviour
             Debug.LogWarning("Either AudioSource or AudioClip is not assigned.");
         }
     }
+    public void PlayMusic(ClipType clipType)
+    {
+        if (musicSource && clipDictionary.ContainsKey(clipType))
+        {
+            musicSource.clip = clipDictionary[clipType];
+            musicSource.loop = false;
+            musicSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Either AudioSource or AudioClip is not assigned.");
+        }
+    }
 
     // Audio clips kept private and assigned within the script
     [SerializeField] AudioClip menuButton;

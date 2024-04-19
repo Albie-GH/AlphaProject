@@ -48,6 +48,8 @@ public class ThirdPersonMovement : MonoBehaviour
         rb.freezeRotation = true;
         readyToJump = true;
         animator = GetComponentInChildren<Animator>();
+        moveSpeed = StatsManager.Instance.playerSpeed;
+        groundDrag = moveSpeed / 3;
     }
 
     private void Update()

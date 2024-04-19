@@ -16,7 +16,10 @@ public class StatsManager : MonoBehaviour
 
     [Header("Inventory")]
     public int keys = 0;
+
+    public float playerSpeed = 8;
     public bool jumpUnlocked = false;
+    public bool speedUnlocked = false;
 
     // DIFFICULTY STATS
     [Header("Difficulty")]
@@ -31,6 +34,13 @@ public class StatsManager : MonoBehaviour
     public float undetectingSpeed = -25f;
     public float enemyDetectRange = 15f;
     public float enemyFastDetectRange = 5f;
+
+    // STAT TOTALS
+    public int coinsST = 0;
+    public int coinsSpentST = 0;
+    public int keysST = 0;
+    public int keysUsedST = 0;
+
 
     // Enemies
     private List<EnemyVision> _enemies = new List<EnemyVision>();
@@ -62,12 +72,14 @@ public class StatsManager : MonoBehaviour
         totalCoins++;
         coinsThisRound++;
         quotaProgress++;
+        coinsST++;
     }
     public bool SpendCoins(int amount)
     {
         if(amount >= totalCoins)
         {
             totalCoins -= amount;
+            coinsSpentST += amount;
             return true;
         }
         else
@@ -87,6 +99,7 @@ public class StatsManager : MonoBehaviour
     public void CollectKey()
     {
         keys++;
+        keysST++;
     }
 
 
@@ -117,7 +130,10 @@ public class StatsManager : MonoBehaviour
 
     public void IncreaseCurrentDetection(float amount)
     {
-        currentDetection += amount;
+        if (currentDetection < enemyDetectTime)
+        {
+            currentDetection += amount;
+        }
     }
     public bool AnyEnemyCanSeePlayer()
     {

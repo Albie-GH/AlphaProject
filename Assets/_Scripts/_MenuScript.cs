@@ -8,13 +8,11 @@ public class _MenuScript : MonoBehaviour
     [SerializeField] Canvas mainMenuCanvas;
     [SerializeField] Canvas shopCanvas;
     GameManager GameManager;
-    SoundManager SoundManager;
 
     public void Awake()
     {
         Time.timeScale = 1;
         GameManager = FindFirstObjectByType<GameManager>();
-        SoundManager = FindFirstObjectByType<SoundManager>();
     }
     public void StartGame()
     {

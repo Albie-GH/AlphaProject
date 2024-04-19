@@ -24,6 +24,12 @@ public class ShopManager : MonoBehaviour
     public Button jumpBTN;
     public int jumpCost = 5;
     public TMP_Text jumpSoldOut;
+    
+    [Header("Speed")]
+    public TMP_Text speedCostText;
+    public Button speedBTN;
+    public int speedCost = 5;
+    public TMP_Text speedSoldOut;
 
     private void Awake()
     {
@@ -36,6 +42,7 @@ public class ShopManager : MonoBehaviour
         key1BTN.onClick.AddListener(BuyKey1);
         key5BTN.onClick.AddListener(BuyKey5);
         jumpBTN.onClick.AddListener(BuyJump);
+        speedBTN.onClick.AddListener(BuySpeed);
     }
 
 
@@ -78,6 +85,22 @@ public class ShopManager : MonoBehaviour
             jumpCostText.color = Color.red;
         }
 
+        // ******
+        // SPEED
+        speedCostText.text = speedCost.ToString();
+        speedSoldOut.enabled = false;
+
+        if (StatsManager.Instance.speedUnlocked)
+        {
+            speedBTN.gameObject.SetActive(false);
+            speedSoldOut.enabled = true;
+        }
+
+        else if (speedCost > StatsManager.Instance.totalCoins)
+        {
+            speedBTN.interactable = false;
+            speedCostText.color = Color.red;
+        }
 
 
         // Update UI at end
@@ -92,6 +115,7 @@ public class ShopManager : MonoBehaviour
             if (StatsManager.Instance.totalCoins >= key1Cost)
             {
                 StatsManager.Instance.totalCoins -= key1Cost;
+                StatsManager.Instance.coinsSpentST += key1Cost;
                 StatsManager.Instance.keys += 1;
                 SoundManager.PlayClip(SoundManager.ClipType.BuyButton);
             }
@@ -108,6 +132,7 @@ public class ShopManager : MonoBehaviour
             if (StatsManager.Instance.totalCoins >= key5Cost)
             {
                 StatsManager.Instance.totalCoins -= key5Cost;
+                StatsManager.Instance.coinsSpentST += key5Cost;
                 StatsManager.Instance.keys += 5;
                 SoundManager.PlayClip(SoundManager.ClipType.BuyButton);
 
@@ -125,7 +150,26 @@ public class ShopManager : MonoBehaviour
             if (StatsManager.Instance.totalCoins >= jumpCost)
             {
                 StatsManager.Instance.totalCoins -= jumpCost;
+                StatsManager.Instance.coinsSpentST += jumpCost;
                 StatsManager.Instance.jumpUnlocked = true;
+                SoundManager.PlayClip(SoundManager.ClipType.BuyButton);
+
+            }
+        }
+        UpdateShop();
+    }
+
+    void BuySpeed()
+    {
+        // Buying speed
+        if (StatsManager.Instance != null)
+        {
+            if (StatsManager.Instance.totalCoins >= speedCost)
+            {
+                StatsManager.Instance.totalCoins -= speedCost;
+                StatsManager.Instance.coinsSpentST += speedCost;
+                StatsManager.Instance.playerSpeed += 4f;
+                StatsManager.Instance.speedUnlocked = true;
                 SoundManager.PlayClip(SoundManager.ClipType.BuyButton);
 
             }

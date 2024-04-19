@@ -13,19 +13,22 @@ public class EnemyVision : MonoBehaviour
     private float _undetectingSpeed;
     private bool _playerInSight = false;
 
+    bool _gameLostSoundPlayed = false;
+
     public LayerMask obstacleMask; // Set this as whatIsGround
 
     [SerializeField] private GameObject playerOBJ;
 
     private GameManager gameManager;
     private HUDScript HUD;
-
+    SoundManager SoundManager;
 
     private void Awake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
         HUD = FindFirstObjectByType<HUDScript>();
         playerOBJ = GameObject.FindGameObjectWithTag("PlayerOBJ");
+        SoundManager = FindFirstObjectByType<SoundManager>();
     }
     private void Start()
     {
@@ -48,6 +51,11 @@ public class EnemyVision : MonoBehaviour
         if (StatsManager.Instance.currentDetection >= StatsManager.Instance.enemyDetectTime)
         {
             gameManager.UpdateGameState(GameState.Lose);
+            if (!_gameLostSoundPlayed)
+            {
+                SoundManager.PlayMusic(SoundManager.ClipType.GameOver);
+                _gameLostSoundPlayed = true;
+            }
         }
 
 

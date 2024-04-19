@@ -43,6 +43,7 @@ public class PlayerInteraction : MonoBehaviour
             if(StatsManager.Instance.quotaProgress >= StatsManager.Instance.totalQuota)
             {
                 GameManager.UpdateGameState(GameState.RoundComplete);
+                SoundManager.PlayMusic(SoundManager.ClipType.RoundComplete);
             }
             else
             {
@@ -129,6 +130,8 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (door && Input.GetKeyDown(useKeyKey) && door.isLocked && StatsManager.Instance.keys > 0)
         {
+            SoundManager.PlayClip(SoundManager.ClipType.UnlockDoor);
+            StatsManager.Instance.keysUsedST++;
             door.UnlockDoor();
             HUD.HideKeyText();
             HUD.UpdateUI();
@@ -137,6 +140,12 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && GameManager.State == GameState.Play)
         {
             GameManager.UpdateGameState(GameState.Paused);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            StatsManager.Instance.CollectCoin();
+            HUD.UpdateUI();
         }
     }
 }

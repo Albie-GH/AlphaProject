@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private HUDScript HUD;
 
     public GameState State;
 
@@ -16,11 +15,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
     }
 
     private void Start()
     {
-        HUD = FindFirstObjectByType<HUDScript>();
         UpdateGameState(GameState.Play);
     }
 
@@ -37,7 +36,7 @@ public class GameManager : MonoBehaviour
                 HandleRoundComplete();
                 break;
             case GameState.Lose:
-                HandlePause();
+                HandleLose();
                 break;
             case GameState.Paused:
                 HandlePause();
@@ -67,7 +66,13 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 0;
     }
+    private void HandleLose()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
 
+    }
 
 }
 

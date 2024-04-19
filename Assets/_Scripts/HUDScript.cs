@@ -62,7 +62,6 @@ public class HUDScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     public void UpdateUI()
     {
         _coinsText.text = "x" + StatsManager.Instance.totalCoins;

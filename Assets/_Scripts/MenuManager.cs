@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject _settingsPanel;
 
+    SoundManager SoundManager;
     void Awake()
     {
         // Subscribe to GameManagerOnGameStateChanged
